@@ -1,20 +1,21 @@
 import tornado.web
 import simplejson
+import time
 from pymongo import Connection, json_util
-
-conn = Connection()
-db = conn.tipu
-issues = db.issues
 
 class IssuesController(tornado.web.RequestHandler):
     
     def get(self):
-        i = list(issues.find())
-        self.set_header('Content-Type', 'text/json')
-        self.write(simplejson.dumps(i, default=json_util.default))
-        self.finish()
+        issues = list(Connection().tipu.issues.find())
+        # i = list(issues.find())
+        # self.set_header('Content-Type', 'text/json')
+        # self.write(simplejson.dumps(i, default=json_util.default))
+        self.render("../views/issues/get.html", issues=issues)
         
     def post(self):
-        issues.insert(self.request.arguments)
-        self.finish()
+        Connection().tipu.issues.insert({
+            "raw": self.get_argument('issue'),
+            "created_at": time.time()
+        })
+        self.redirect('/')
         

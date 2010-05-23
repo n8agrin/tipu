@@ -1,12 +1,13 @@
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
+from tornado.options import define, options
 
 # Controllers
 from controllers.issues import IssuesController
 
 application = tornado.web.Application([
-    (r"/issues", IssuesController),
+    (r"/", IssuesController),
 ])
 
 if __name__ == "__main__":

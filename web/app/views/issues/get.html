@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Issues</title>
+  
+</head>
+<body>
+  <h1>Issues</h1>
+  <form method="post" action="/">
+    <fieldset id="foo" class="">
+      <legend>Add an issue</legend>
+      <textarea name="issue" rows="8" cols="40"></textarea>
+      <br/>
+      <input type="submit" name="add_issue" value="Submit" id="add_issue">
+    </fieldset>
+  </form>
+  
+  <div class="issues">
+    {% for issue in issues %}
+    <div class="issue">
+      <h3>{{escape(issue.get('raw'))}}</h3>
+    </div>
+    {% end %}
+  </div>
+</body>
+</html>
