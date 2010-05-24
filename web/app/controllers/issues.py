@@ -1,5 +1,5 @@
 import tornado.web
-import simplejson
+import json
 import time
 from pymongo import Connection, json_util
 
@@ -9,7 +9,7 @@ class IssuesController(tornado.web.RequestHandler):
         issues = list(Connection().tipu.issues.find())
         # i = list(issues.find())
         # self.set_header('Content-Type', 'text/json')
-        # self.write(simplejson.dumps(i, default=json_util.default))
+        # self.write(json.dumps(i, default=json_util.default))
         self.render("../views/issues/get.html", issues=issues)
         
     def post(self):
